@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "광고 가속기",
+  "version": "0.0.0.3",
+  "description": "광고가 나오면 광고 속도가 빨라지거나 제거됩니다.",
+  "permissions": ["webNavigation", "scripting"],
+  "host_permissions": [
+    "*://*.youtube.com/*",
+    "*://www.afreecatv.com/*",
+    "*://*.tv.naver.com/*",
+    "*://*.chzzk.naver.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.youtube.com/*",
+        "*://www.afreecatv.com/*",
+        "*://*.tv.naver.com/*",
+        "*://*.chzzk.naver.com/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_end"
+    }
+  ]
+}
