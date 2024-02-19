@@ -20,12 +20,24 @@
       // const ad = document.querySelector('.video-stream.html5-main-video'); video-stream html5-main-video
     }
   } 
-  // 네이버 TV
+  // 네이버 TV and 치지직
   function NTVhandleVideoAd() {
     const skipButton = document.querySelector('.btn_skip');
     if (skipButton) {
       skipButton.click();
       console.log('네이버 광고 스킵 버튼 클릭');
+    }
+  }
+  // 아프리카 TV
+  function AFTVhandleVideoAd() {
+    const vi = document.getElementById('livePlayer');
+    const ad = document.getElementById('pipMedia');
+    const a = document.querySelector('.da_area');
+
+    if(ad.style.display !== 'none'){
+      ad.remove();
+      a.remove();
+      vi.play();
     }
   }
 
@@ -40,18 +52,22 @@
 
     if(url === 'https://www.youtube.com'){ // 유튜브
       YThandleVideoAd();
+      fn = YThandleVideoAd;
     }
     else if(url === 'https://tv.naver.com'){ // 네이버 티비
-      NTVhandleVideoAd()
+      NTVhandleVideoAd();
+      fn = NTVhandleVideoAd;
     }
     else if(url === 'https://chzzk.naver.com'){ // 치지직 
-
+      NTVhandleVideoAd()
+      fn = NTVhandleVideoAd;
     }
     else if(url === 'https://www.afreecatv.com'){ // 아프리카
-
+      AFTVhandleVideoAd()
+      fn = AFTVhandleVideoAd;
     }
 
-    const observer = new MutationObserver(YThandleVideoAd);
+    const observer = new MutationObserver(fn);
     observer.observe(document.body, { childList: true, subtree: true });
   }
   // Delay before executing the script (required for Hulu)
